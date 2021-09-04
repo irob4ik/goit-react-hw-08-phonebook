@@ -1,0 +1,22 @@
+/* Home View */
+
+.welcome {
+  display: flex;
+  height: 660px;
+  margin-top: 2px;
+  margin-right: auto;
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../img/1.jpg');
+}
+
+/* Register View */
+
+.registerForm {
+  margin-top: 15px;
+}
+
+.text_muted {
+  color: white;
+}

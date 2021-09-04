@@ -1,0 +1,11 @@
+.container {
+  max-width: 690px;
+  min-height: 100%;
+  margin-left: 26%;
+  margin-right: auto;
+  padding-left: 30px;
+  padding-right: 30px;
+  min-height: 100vh;
+
+  background-color: rgba(40, 100, 130, 0.5);
+}

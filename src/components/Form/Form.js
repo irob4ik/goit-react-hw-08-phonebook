@@ -5,7 +5,7 @@ import { contactsOperations } from '../../redux';
 import styles from './form.module.css';
 import { v4 as uuidv4 } from 'uuid';
 
-export default function Form({ option }) {
+export default function Form() {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
     const dispatch = useDispatch();
@@ -42,9 +42,7 @@ export default function Form({ option }) {
     }
 
     return (
-        <>
-        <h1>{option}</h1>
-        
+        <>        
         <form onSubmit={handleSubmit}  autoComplete="off" className={styles.phoneBookForm}>
             <label htmlFor={inputId} className={styles.formLabel}>Name</label>
                 <input

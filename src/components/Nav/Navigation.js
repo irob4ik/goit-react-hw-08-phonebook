@@ -6,20 +6,19 @@ import styles from './nav.module.css';
 
 export default function Navigation() {
     const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
-    const HOME_PAGE = '/goit-react-hw-08-phonebook';
-
+    
     return (
         <nav>
             <NavLink
                 exact
-                to={`${HOME_PAGE}/`}
+                to="/"
                 className={styles.link_title}
             >MY PhonebooK
             </NavLink>
 
             {isLoggedIn && (
                 <NavLink                
-                    to={`${HOME_PAGE}/contacts`}                
+                    to='/contacts'                
                     className={styles.link}
                     activeClassName={styles.activeLink}
                 >MY Contacts

@@ -17,6 +17,7 @@ const ContactsView = lazy(() => import('./views/ContactsView'));
 const NotFoundView = lazy(() => import('./views/NotFoundView'));
 
 export default function App() {
+  const HOME_PAGE = '/goit-react-hw-08-phonebook';
   const dispatch = useDispatch();
   const isfetchCurrentUser = useSelector(authSelectors.getFetchingCurrentUser);
 
@@ -34,16 +35,16 @@ export default function App() {
             
               <Switch>
 
-                <PublicRoute exact path="/">
+                <PublicRoute exact path={`${HOME_PAGE}/`}>
                   <HomeView />
                 </PublicRoute>
-                <PublicRoute path="/register" restricted>
+              <PublicRoute path={`${HOME_PAGE}/register`} restricted>
                   <RegisterView />
                 </PublicRoute>
-                <PublicRoute path="/login" restricted redirectTo='/contacts'>
+                <PublicRoute path={`${HOME_PAGE}/login`} restricted redirectTo={`${HOME_PAGE}/contacts`}>
                   <LoginView />
                 </PublicRoute>          
-                <PrivateRoute path="/contacts" redirectTo='/login'>
+                <PrivateRoute path={`${HOME_PAGE}/contacts`} redirectTo={`${HOME_PAGE}/login`}>
                   <ContactsView />
                 </PrivateRoute>            
                 <Route exact path="" component={NotFoundView} />

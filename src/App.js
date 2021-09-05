@@ -1,42 +1,58 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import AppBar from './components/AppBar/AppBar';
 import Container from './components/Container/Container';
 import Loader from './components/Loader/Loader';
-import styles from './app.module.css'
+// import styles from './app.module.css'
+import authOperations from './redux/auth/auth-operations';
+import PrivateRoute from './components/Nav/PrivateRoute';
+import PublicRoute from './components/Nav/PublicRoute';
+import authSelectors from './redux/auth/auth-selectors';
 
 const HomeView = lazy(() => import('./views/HomeView'));
 const RegisterView = lazy(() => import('./views/RegisterView'));
 const LoginView = lazy(() => import('./views/LoginView'));
-// const ContactsView = lazy(() => import('./views/ContactsView'));
-// const NotFoundView = lazy(() => import('./views/NotFoundView'));
-
-
-
-// import Form from './components/Form/Form';
-// import Contacts from './components/Contacts/Contacts';
-// import Filter from './components/Filter/Filter';
+const ContactsView = lazy(() => import('./views/ContactsView'));
+const NotFoundView = lazy(() => import('./views/NotFoundView'));
 
 export default function App() {
+  const dispatch = useDispatch();
+  const isfetchCurrentUser = useSelector(authSelectors.getFetchingCurrentUser);
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+
   return (
     <Container>
-      <AppBar />
+      {!isfetchCurrentUser && (
+        <>
+          <AppBar />
 
-      <Suspense fallback={<Loader/>}>
-        <Switch>
-          <Route exact path="/" component={HomeView} />
-          <Route exact path="/register" component={RegisterView} />
-          <Route exact path="/login" component={LoginView} />
-          {/* <Route exact path="/contacts" component={ContactsView} />
-          <Route exact path="" component={NotFoundView} /> */}
-        </Switch>
-      </Suspense>
+          <Suspense fallback={<Loader />}>
+            
+              <Switch>
 
-      {/* <Form/>    
-      <h2 className={styles.contactList}>Contacts</h2>    
-      <Filter/>    
-      <Contacts /> */}
-      
+                <PublicRoute exact path="/">
+                  <HomeView />
+                </PublicRoute>
+                <PublicRoute path="/register" restricted>
+                  <RegisterView />
+                </PublicRoute>
+                <PublicRoute path="/login" restricted redirectTo='/contacts'>
+                  <LoginView />
+                </PublicRoute>          
+                <PrivateRoute path="/contacts" redirectTo='/login'>
+                  <ContactsView />
+                </PrivateRoute>            
+                <Route exact path="" component={NotFoundView} />
+
+              </Switch>
+                    
+          </Suspense>
+        </>
+      )}
     </Container>
   );
 }

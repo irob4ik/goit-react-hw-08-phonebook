@@ -9,8 +9,6 @@ export default function Contacts() {
     const { items, filter } = useSelector(contactsSelectors.getContacts);
     const list = filteredContacts(items, filter);
 
-    console.log(items);
-
     useEffect(() => {
         dispatch(contactsOperations.fetchContacts())
     }, [dispatch]);

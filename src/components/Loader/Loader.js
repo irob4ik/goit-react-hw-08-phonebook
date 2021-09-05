@@ -8,8 +8,8 @@ export default function Loader() {
             <Spinner
                 type="Puff"
                 color="#3f51b599"
-                height={300}
-                width={300}
+                height={150}
+                width={150}
                 timeout={3000}            
             />
         </div>

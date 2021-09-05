@@ -14,7 +14,7 @@ export default function UserMenu() {
 
     return (
         <div className={styles.container}>
-            <img src={avatar} alt="" width="32" className={styles.avatar} />
+            <img src={avatar} alt="" width="24" className={styles.avatar} />
             <span className={styles.userName}>hello, {name}</span>
             <Button
                 className={styles.Btn}
